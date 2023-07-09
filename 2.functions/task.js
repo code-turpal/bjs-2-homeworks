@@ -90,8 +90,9 @@ function makeWork(arrOfArr, func) {
 	let maxWorkerResult = -Infinity;
 
 	for (let i = 0; i < arrOfArr.length; i++) {
-		if (func(...arrOfArr[i]) > maxWorkerResult) {
-			maxWorkerResult = func(...arrOfArr[i]);
+		const funcResult = func(...arrOfArr[i]);
+		if (funcResult > max) {
+  			max = funcResult;
 		}
 	}
 	return maxWorkerResult;
