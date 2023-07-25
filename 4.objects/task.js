@@ -24,10 +24,14 @@ class Student {
 
 	getAverage() {
 		let allSubject = Object.keys(this.marks);
-		let sumAverageBySubject = [];
-		for (let i = 0; i < allSubject.length; i++) {
-			sumAverageBySubject.push(this.getAverageBySubject(allSubject[i]));
-		}
-		return (sumAverageBySubject.reduce((acc, mark) => acc + mark) / allSubject.length);
+		if (allSubject.length !== 0) {
+			let sumAverageBySubject = [];
+			for (let i = 0; i < allSubject.length; i++) {
+				sumAverageBySubject.push(this.getAverageBySubject(allSubject[i]));
+			}
+			return (sumAverageBySubject.reduce((acc, mark) => acc + mark) / allSubject.length);
+		} else {
+			return 0;
+		}	
 	}
 }
