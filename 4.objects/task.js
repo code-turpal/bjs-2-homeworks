@@ -1,32 +1,33 @@
-function Student(name, gender, age) {
-	this.name = name;
-	this.gender = gender;
-	this.age = age;
-	this.marks = [];
-}
-
-Student.prototype.setSubject = function(subjectName) {
-	this.subject = subjectName;
-}
-
-Student.prototype.addMarks = function(...marks) {
-	if (this.hasOwnProperty('marks')) {
-		this.marks.push(...marks);
-	} else {
-		console.log("Студент отчислен");
+class Student {
+	constructor(name) {
+		this.name = name;
+		this.marks = {};
 	}
-}
 
-Student.prototype.getAverage = function() {
-	if (this.hasOwnProperty('marks') && this.marks.length !== 0) {
-		return (this.marks.reduce((acc, mark) => acc + mark) / this.marks.length);
-	} else {
-		return 0;
+	addMark(mark, subjectName) {
+		if (mark > 1 && mark < 6 && !isNaN(mark)) {
+			if (!this.marks.hasOwnProperty(subjectName)) {
+				this.marks[subjectName] = [mark];
+			} else {
+				this.marks[subjectName].push(mark);
+			}
+		}
 	}
-}
 
-Student.prototype.exclude = function(reason) {
-	delete this.subject;
-	delete this.marks;
-	this.excluded = reason;
+	getAverageBySubject(subjectName) {
+		if (this.marks.hasOwnProperty(subjectName) && typeof subjectName === 'string') {
+			return (this.marks[subjectName].reduce((acc, mark) => acc + mark) / this.marks[subjectName].length);
+		} else {
+			return 0;
+		}
+	}
+
+	getAverage() {
+		let allSubject = Object.keys(this.marks);
+		let sumAverageBySubject = [];
+		for (let i = 0; i < allSubject.length; i++) {
+			sumAverageBySubject.push(this.getAverageBySubject(allSubject[i]));
+		}
+		return (sumAverageBySubject.reduce((acc, mark) => acc + mark) / allSubject.length);
+	}
 }
