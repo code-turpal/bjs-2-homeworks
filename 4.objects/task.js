@@ -7,7 +7,7 @@ class Student {
 	addMark(mark, subjectName) {
 		if (mark > 1 && mark < 6 && !isNaN(mark)) {
 			if (!this.marks.hasOwnProperty(subjectName)) {
-				this.marks[subjectName] = [mark];
+				this.marks[subjectName] = [mark];       
 			} else {
 				this.marks[subjectName].push(mark);
 			}
